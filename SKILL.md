@@ -98,6 +98,15 @@ Trailing `;` evaluates silently, trailing `:` prints the result line only. Fence
 - Plots: a ```` ```plot ```` fence with `title:`, `x = 0 .. 2` (or `0 m .. 6 m`), `xlabel:`,
   `ylabel:`, one expression in `x` per line (`M(x)`, `2 - 2 x`), `(1, 0.5)` points; the
   trailing `#` comment is the legend entry.
+- Catalogues: front matter `catalogs: { IPE: { file: IPE-props_EC3UK.json, units: { H: mm,
+  Wply: cm^3 } } }`, then `sec = IPE["IPE 300"]` and `W_pl_y = sec.Wply`. Do not name the row
+  variable `s`, `m` or another unit. The file sits next to the document (CLI); the web app
+  bundles the IPE and HE tables.
+- `integrate(q x, x, 0 m, L)` (numeric, units carried), `derivative(q x L/2 - q x^2/2, x)` and
+  `simplify(expr)` (symbolic, print only).
+- Conditional prose: ```` ```if U > 0.8 ```` … ```` ``` ```` shows the Markdown inside only
+  when true; write a second fence for the other case.
+- A parameter is an input ending in `?`: `L = 6.0 m ?`. The editor lists these as a form.
 - Loops in math: `for e = 1 : n_E` … `end`, nestable, `K[i, j] = K[i, j] + k` updates one
   element; end body lines with `;` to print only what matters. Loops in prose: a
   ```````for i = 1 : n```` fence right after a table header line gives one row per `i`
@@ -109,8 +118,7 @@ Trailing `;` evaluates silently, trailing `:` prints the result line only. Fence
 
 ## 10. Not in v1
 
-Imports and section catalogs
-(`IPE300.W_pl_y`), `solve`, `derivative`, `integrate`, custom units, imperial units.
+Imports of other documents, `solve`, custom units, imperial units.
 
 ## 11. Six mistakes that cost a round-trip
 
