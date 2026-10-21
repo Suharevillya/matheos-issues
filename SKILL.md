@@ -106,7 +106,8 @@ Trailing `;` evaluates silently, trailing `:` prints the result line only. Fence
   `simplify(expr)` (symbolic, print only).
 - Conditional prose: ```` ```if U > 0.8 ```` … ```` ``` ```` shows the Markdown inside only
   when true; write a second fence for the other case.
-- A parameter is an input ending in `?`: `L = 6.0 m ?`. The editor lists these as a form.
+- A parameter is an input ending in `?`: `L = 6.0 m ?`; a catalogue pick may carry it too
+  (`sec = SHS["180X180X6"] ?`). The editor lists these as a form.
 - Loops in math: `for e = 1 : n_E` … `end`, nestable, `K[i, j] = K[i, j] + k` updates one
   element; end body lines with `;` to print only what matters. Loops in prose: a
   ```````for i = 1 : n```` fence right after a table header line gives one row per `i`
