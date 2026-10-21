@@ -24,8 +24,7 @@ code: EN 1993-1-1 + Finnish NA
 ---
 ```
 
-Optional: `logo: file.png`, `logo_width: 40` (mm), `footer: text` (bottom-centre of every
-page; pages are numbered bottom-right, author · date · code sit bottom-left), `digits: 4`.
+Optional: `logo: file.png`, `logo_width: 40` (mm), `digits: 4`.
 
 ## 2. Statements, one per line inside ```` ```math ```` fences
 
@@ -60,7 +59,8 @@ variable from then on). Adding a number to a quantity, or comparing them, is an 
 ## 5. Checks and η
 
 `check <expr> <op> <expr>` with `<=`, `>=`, `<`, `>`, `==`. η = left / right (right / left for
-`>=` and `>`). Write one check per demand/capacity pair.
+`>=` and `>`). Write one check per demand/capacity pair. `check a <= b warn 80%` keeps the
+fail line at 100 % but flags a pass above 80 % with a yellow badge.
 
 ## 6. Conditionals
 
