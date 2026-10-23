@@ -60,7 +60,9 @@ variable from then on). Adding a number to a quantity, or comparing them, is an 
 
 `check <expr> <op> <expr>` with `<=`, `>=`, `<`, `>`, `==`. η = left / right (right / left for
 `>=` and `>`). Write one check per demand/capacity pair. `check a <= b warn 80%` keeps the
-fail line at 100 % but flags a pass above 80 % with a yellow badge.
+fail line at 100 % but flags a pass above 80 % with a yellow badge. A range is one line:
+`check 0.25 <= beta <= 1`. A ternary may sit inside a check when bracketed. In prose,
+`{U to %}` shows a value in a display unit.
 
 ## 6. Conditionals
 
@@ -89,7 +91,7 @@ Trailing `;` evaluates silently, trailing `:` prints the result line only. Fence
 
 - Vectors: `lx = [5400, 5400, 200] mm`, element-wise `.*` `./` `.^`, `lx[2]`, slices
   `x[2:5]`, `sum`, `max`, `dot`, `lusolve(K, F)` (returns a column: `z[3, 1]`). Keep a matrix
-  homogeneous: `[0 kN, 0 kN, P]`. `sqrt`, `abs` and friends map over vectors.
+  homogeneous: `[0 kN, 0 kN, P]`. `sqrt`, `abs`, `exp`, `log`, `sin`/`cos`/`tan` (of `deg` quantities too), `min`, `max`, `pi` exist; the one-argument ones map over vectors.
 - `a (b + c)` multiplies when `a` is a variable; `f(x)` calls a function.
 - `cond ? a : b` prints as cases; `U = N_Ed / N_Rd to %` shows a percentage.
 - Tables: GFM Markdown tables with `{expr}` in cells. Images: `![alt](file.svg)` next to the
@@ -129,7 +131,7 @@ Imports of other documents, `solve`, custom units, imperial units.
 3. A comparison without `check` prints a boolean, not a verdict.
 4. `L + 5` — a number plus a quantity is an error; give the literal a unit.
 5. Unit spelling: `kpa`, `Mpa`, `kN.m` are unknown; use `kPa`, `MPa`, `kNm` or `kN m`.
-6. `x = a ? b : c` — not supported; use `if` / `else` / `end`.
+6. `a / b c` is a/(b·c): implicit multiplication binds tighter than `/`. Write `a / b * c` or `(a / b) c`.
 
 ## 12. Engineering guidance
 
