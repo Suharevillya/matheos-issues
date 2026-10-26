@@ -62,7 +62,11 @@ variable from then on). Adding a number to a quantity, or comparing them, is an 
 `>=` and `>`). Write one check per demand/capacity pair. `check a <= b warn 80%` keeps the
 fail line at 100 % but flags a pass above 80 % with a yellow badge. A range is one line:
 `check 0.25 <= beta <= 1`. A ternary may sit inside a check when bracketed. In prose,
-`{U to %}` shows a value in a display unit.
+`{U to %}` shows a value in a display unit. `check a <= b if cond` applies only when `cond`
+holds (n/a badge otherwise). A failure mode that does not apply is `na`: `N_ps = beta <= 0.85
+? … : na`; `min(…)` skips it and a check against it reads n/a. `solve(expr, x, lo, hi)` finds
+the root of `expr = 0` by bisection (units carried) where a spreadsheet would goal-seek. A
+moment per length shows with `to kNm/m`.
 
 ## 6. Conditionals
 
