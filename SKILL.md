@@ -45,6 +45,8 @@ keyword; a bare comparison is just a boolean. Rebinding a name is allowed; last 
 `[A-Za-z_][A-Za-z0-9_]*`. First `_` opens a subscript, later `_` become commas:
 `W_pl_y` → W_{pl,y}, `M_c_Rd` → M_{c,Rd}. Spelled Greek renders as the letter:
 `gamma_M0`, `alpha_cc`, `eps`, `lambda`, `eta`, `phi`, `delta`, `sigma`. Trailing `'` is a prime.
+An accent right after a Greek base decorates it: `lambda_bar_y` → λ̄_y (`_bar`, `_hat`,
+`_tilde`); a Latin `d_bar` keeps "bar" as its subscript.
 
 ## 4. Units
 
@@ -58,8 +60,9 @@ variable from then on). Adding a number to a quantity, or comparing them, is an 
 
 ## 5. Checks and η
 
-`check <expr> <op> <expr>` with `<=`, `>=`, `<`, `>`, `==`. η = left / right (right / left for
-`>=` and `>`). Write one check per demand/capacity pair. `check a <= b warn 80%` keeps the
+`check <expr> <op> <expr>` with `<=`, `>=`, `<`, `>`, `==`, `!=`. η = left / right (right / left for
+`>=` and `>`). Text values compare as text: `curve = "b"`, `alpha = curve == "b" ? 0.34 : 0.49`,
+`check curve == "b"` (verdict, no η). `not a` negates a boolean. Write one check per demand/capacity pair. `check a <= b warn 80%` keeps the
 fail line at 100 % but flags a pass above 80 % with a yellow badge. A range is one line:
 `check 0.25 <= beta <= 1`. A ternary may sit inside a check when bracketed. In prose,
 `{U to %}` shows a value in a display unit. `check a <= b if cond` applies only when `cond`
@@ -104,6 +107,9 @@ Trailing `;` evaluates silently, trailing `:` prints the result line only. Fence
 - Plots: a ```` ```plot ```` fence with `title:`, `x = 0 .. 2` (or `0 m .. 6 m`), `xlabel:`,
   `ylabel:`, one expression in `x` per line (`M(x)`, `2 - 2 x`), `(1, 0.5)` points; the
   trailing `#` comment is the legend entry.
+- Includes: front matter `include: helpers.mth` (or a list) binds another document's variables
+  and functions before the first block, printing nothing. Resolved next to the document (CLI),
+  by document name in the web library, or through `resolve` when embedded.
 - Catalogues: front matter `catalogs: { IPE: { file: IPE-props_EC3UK.json, units: { H: mm,
   Wply: cm^3 } } }`, then `sec = IPE["IPE 300"]` and `W_pl_y = sec.Wply`. Do not name the row
   variable `s`, `m` or another unit. The file sits next to the document (CLI); the web app
