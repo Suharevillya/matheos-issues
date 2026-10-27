@@ -124,6 +124,9 @@ Trailing `;` evaluates silently, trailing `:` prints the result line only. Fence
   bundles the IPE and HE tables.
 - `integrate(q x, x, 0 m, L)` (numeric, units carried), `derivative(q x L/2 - q x^2/2, x)` and
   `simplify(expr)` (symbolic, print only).
+
+  ![integrate with units, derivative and simplify printed symbolically](img/calculus.png)
+
 - Conditional prose: ```` ```if U > 0.8 ```` … ```` ``` ```` shows the Markdown inside only
   when true; write a second fence for the other case.
 - A parameter is an input ending in `?`: `L = 6.0 m ?`; a catalogue pick may carry it too
