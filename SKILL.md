@@ -5,8 +5,11 @@ description: Write and verify Matheos `.mth` calculation documents (Markdown pro
 
 # Writing Matheos documents
 
-A `.mth` file is CommonMark with YAML front matter and fenced `math` blocks. Statements run top
-to bottom; every derived statement prints formula, substituted values and result; every `check`
+A `.mth` file is CommonMark with YAML front matter and fenced `math` blocks. CommonMark is the
+standard flavour of Markdown: `#` headings, paragraphs, lists, GFM tables, and fenced code
+blocks between lines of three backticks; a fence tagged `math` is a calculation block. YAML front
+matter is the block between two `---` lines at the top, one `key: value` per line, holding the
+title, author and other metadata of the report. Statements run top to bottom; every derived statement prints formula, substituted values and result; every `check`
 prints a verdict and the utilization η. Start from the closest file in
 `examples/` (https://github.com/Suharevillya/matheos/tree/main/examples); `steel-beam.mth` is
 the canonical template.
@@ -57,6 +60,11 @@ arithmetic; a result prints in a sensible default (mm, kN, kN·m, kN/m, MPa) unl
 statement with `to <unit>`: `M_c_Rd = W_pl_y * f_y / gamma_M0 to kNm`. `to` never changes the
 stored value. A bound name wins over a unit of the same spelling (`t = 10 mm` makes `t` a
 variable from then on). Adding a number to a quantity, or comparing them, is an error.
+
+Engineering guidance: SI inputs with a unit on every literal. `to` on every resistance so the
+report reads in kN and kN·m. A `check` for every demand/capacity pair. Captions carry clause
+numbers (`# (6.13)`). Prose explains; math computes. Mind `a / b c` = a/(b·c): implicit
+multiplication binds tighter than `/`; write `a / b * c` for (a/b)·c.
 
 ## 5. Checks and η
 
@@ -125,41 +133,12 @@ Trailing `;` evaluates silently, trailing `:` prints the result line only. Fence
   ```````for i = 1 : n```` fence right after a table header line gives one row per `i`
   (`| {i} | {F[i]} |`); inside `<svg>` it gives one element per `i`. The variable is
   substituted only inside `{…}`.
+
+  ![A table with one row per wall from a for fence](img/table.png)
+
+  ![An SVG plan drawn from the vectors, one element per wall](img/drawing.png)
+
+  ![A plot fence: the bending moment of a beam](img/plot.png)
 - A long matrix may continue on the next lines while a bracket is open; the result prints
   after the last line. A vector with one unit prints it once: `[5.6  0.0066] kN/mm`. Lines wider than the page
   shrink to fit; keep huge matrices silent (`K = zeros(15, 15);`) and show them as tables.
-
-## 10. Not in v1
-
-Imports of other documents, `solve`, custom units, imperial units.
-
-## 11. Six mistakes that cost a round-trip
-
-1. `kN/m2` — write `kN/m^2`.
-2. `a / b c` means a/(b·c): implicit multiplication binds tighter than `/`. Write `a / b * c`
-   when you mean (a/b)·c.
-3. A comparison without `check` prints a boolean, not a verdict.
-4. `L + 5` — a number plus a quantity is an error; give the literal a unit.
-5. Unit spelling: `kpa`, `Mpa`, `kN.m` are unknown; use `kPa`, `MPa`, `kNm` or `kN m`.
-6. `a / b c` is a/(b·c): implicit multiplication binds tighter than `/`. Write `a / b * c` or `(a / b) c`.
-
-## 12. Engineering guidance
-
-SI inputs with a unit on every literal. `to` on every resistance so the report reads in kN and
-kN·m. A `check` for every demand/capacity pair. Captions carry clause numbers (`# (6.13)`).
-Prose explains; math computes.
-
-## 13. The feedback loop
-
-```
-matheos check doc.mth --json      # errors with line/column, checks with verdict and eta, values
-matheos render doc.mth            # doc.pdf beside the source; -o doc.html for HTML
-```
-
-Exit codes: 0 ok · 1 document errors · 2 a check failed · 3 usage, missing file or no Chromium.
-Fix every error first, then every failed check that is not intended, then render. Never read
-the PDF to verify; the JSON is the loop.
-
-## 14. Template
-
-Copy `examples/steel-beam.mth` from the repository and replace section by section.
