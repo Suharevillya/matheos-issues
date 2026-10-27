@@ -63,8 +63,13 @@ variable from then on). Adding a number to a quantity, or comparing them, is an 
 
 Engineering guidance: SI inputs with a unit on every literal. `to` on every resistance so the
 report reads in kN and kN·m. A `check` for every demand/capacity pair. Captions carry clause
-numbers (`# (6.13)`). Prose explains; math computes. Mind `a / b c` = a/(b·c): implicit
-multiplication binds tighter than `/`; write `a / b * c` for (a/b)·c.
+numbers (`# (6.13)`). Prose explains; math computes.
+
+Multiplication style: implicit is the norm (`q L^2 / 8`, `W_pl_y f_y`). Write `*` when the next
+factor is a bracket or a call after `/`: `a / b * (c + d)`, `M / W * f(x)`, because `a / b (c + d)`
+is a/(b·(c + d)) (implicit multiplication binds tighter than `/`; the checker warns). A bound
+name before a bracket multiplies (`a (b + c)`); inside `simplify`, `derivative`, `integrate`
+and `solve` the free variable does too (`x (L - x)`).
 
 ## 5. Checks and η
 
