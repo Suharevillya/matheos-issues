@@ -110,7 +110,7 @@ Trailing `;` evaluates silently, trailing `:` prints the result line only. Fence
 ## 9. Vectors, tables, drawings, plots
 
 - Vectors: `lx = [5400, 5400, 200] mm`, element-wise `.*` `./` `.^`, `lx[2]`, slices
-  `x[2:5]`, `sum`, `max`, `dot`, `lusolve(K, F)` (returns a column: `z[3, 1]`). Keep a matrix
+  `x[2:5]`, `sum`, `max`, `mean`, `median`, `std`, `dot`, `lusolve(K, F)` (returns a column: `z[3, 1]`). Keep a matrix
   homogeneous: `[0 kN, 0 kN, P]`. `sqrt`, `abs`, `exp`, `log`, `sin`/`cos`/`tan`/`sinh`/`cosh`/`tanh` (of `deg` quantities too), `min`, `max`, `pi` exist; the one-argument ones map over vectors. `pi (d - t)` is a product.
 - `a (b + c)` multiplies when `a` is a variable; `f(x)` calls a function.
 - `cond ? a : b` prints as cases; `U = N_Ed / N_Rd to %` shows a percentage.
