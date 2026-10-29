@@ -39,6 +39,7 @@ Optional: `logo: file.png`, `logo_width: 40` (mm), `digits: 4`.
 | check | `check M_Ed <= M_c_Rd` | both sides with values, ✓/✗, η |
 | conditional | `if c_f / t_f <= 9 eps` … `else if` … `else` … `end` | taken branch only, after its condition |
 | comment | `# own line` or trailing `# caption` | nothing / right-aligned caption |
+| parameter | `L = 6.0 m ?`, `curve = "b" ? ["a", "b", "c"]` | as an input; a form field (text, or radio buttons for the choices) in the editor |
 
 An input is a literal number with an optional unit. Anything else is derived. `check` needs the
 keyword; a bare comparison is just a boolean. Rebinding a name is allowed; last wins.
@@ -136,8 +137,18 @@ Trailing `;` evaluates silently, trailing `:` prints the result line only. Fence
   when true; write a second fence for the other case.
 - A parameter is an input ending in `?`: `L = 6.0 m ?`; a catalogue pick may carry it too
   (`sec = SHS["180X180X6"] ?`). The editor lists these as a form. A list after the `?` gives
-  the choices, shown as radio buttons: `reinf = "none" ? ["multiple", "single", "none"]`,
-  `n_b = 2 ? [1, 2, 3]`. The value before the `?` is the current one.
+  the choices, shown as radio buttons; the value before the `?` is the current one, and the
+  document reads it like any other value:
+
+  ```
+  reinf = "none" ? ["multiple", "single", "none"]   # shear reinforcement
+  n_b = 2 ? [1, 2, 3]                               # bars per layer
+  k_reinf = reinf == "none" ? 1.0 : 1.5
+  ```
+
+  Choices are literals: quoted text, numbers, or quantities (`t = 6 mm ? [5 mm, 6 mm, 8 mm]`).
+  Use a choice wherever a spreadsheet would have a drop-down: buckling curve, exposure class,
+  bolt grade, "yes"/"no" switches that an `if` or a ternary then reads.
 - Loops in math: `for e = 1 : n_E` … `end`, nestable, `K[i, j] = K[i, j] + k` updates one
   element; end body lines with `;` to print only what matters. Loops in prose: a
   ```````for i = 1 : n```` fence right after a table header line gives one row per `i`
