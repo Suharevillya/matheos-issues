@@ -12,5 +12,8 @@ This repository is the public front door of the project while the source stays p
 - **Writing `.mth` documents?** [SKILL.md](SKILL.md) is the authoring guide: grammar, units,
   checks, conditionals, vectors, loops, tables, drawings, plots, and the mistakes that cost a
   round-trip.
+- **Using Claude or another agent on `.mth` files?** [USING-CLAUDE.md](USING-CLAUDE.md): the
+  two setups (chat with the guide as project knowledge, Claude Code with the CLI), the prompts
+  that work, and what stays with the engineer.
 
 Matheos is built by [NODETEC](https://nodetec.fi) next to FrameLab.
