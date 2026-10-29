@@ -56,6 +56,9 @@ checks, fixes the document, and repeats. `matheos render purlin.mth` makes the P
 downloads a Chromium with `matheos install-chrome` if none is found). Open the `.mth` in the
 editor when you want to see it live.
 
+For a quick sum without a file, the same grammar runs from the command line, and `--json` gives
+an agent the values and verdicts: `matheos calc --json "q = 25 kN/m; check q < 30 kN/m"`.
+
 Other agents (Codex, Cursor, Gemini CLI) take the same `SKILL.md`; put it where that tool reads
 its instructions (`AGENTS.md`, `.cursor/rules`, a system prompt).
 
